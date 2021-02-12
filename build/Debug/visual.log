@@ -1,0 +1,5 @@
+﻿C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(444,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+  application.cpp
+application.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/INCREMENTAL:NO'
+  visual.vcxproj -> C:\Users\carlo\Desktop\CG2020_p4\visual\visual\..\..\build\ComputerGraphics.exe
+  0 archivo(s) copiado(s)

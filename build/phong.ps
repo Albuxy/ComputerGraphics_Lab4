@@ -1,0 +1,47 @@
+//this var comes from the vertex shader
+//they are baricentric interpolated by pixel according to the distance to every vertex
+varying vec3 v_wPos;
+varying vec3 v_wNormal;
+
+uniform vec3 Ka,Ia,Kd,Id,Is,Ks;
+uniform vec3 eye,lp, lp1;
+uniform float alpha;
+uniform float blend;
+uniform float cont;
+vec3 color;
+vec3 Ip;
+vec3 LuzP;
+
+//here create uniforms for all the data we need here
+
+void main(){
+	vec3 normal = v_wNormal;
+	vec3 pos = v_wPos;
+	//here we set up the normal as a color to see them as a debug
+	//here write the computations for PHONG.
+	int i=0; 
+	while(i!=cont){
+		if(i==0){
+			LuzP=lp;
+		 }
+		 if(i==1){
+			 LuzP=lp1; 
+		 }
+		vec3 L=normalize(LuzP-pos);
+		vec3 V= normalize(eye-pos);
+		vec3 R= reflect(L*-(1),normal);
+		R=normalize(R);
+
+		vec3 ambient = Ka*Ia;
+		float lightPointNorm = dot(L,normal);
+		vec3 difuse = Kd*lightPointNorm * Id;
+		float refPointCam = pow(dot(R,V),alpha);
+	
+		vec3 especular = Ks*refPointCam*Is;
+
+		Ip= ambient+difuse+especular;
+		color = color+Ip;
+		i=i+1; 
+	}
+	gl_FragColor = vec4( color, blend);
+}
